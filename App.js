@@ -1,20 +1,25 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React from "react";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+
+import LoginScreen from "./src/screens/LoginScreen";
+import TaskListScreen from "./src/screens/TaskListScreen";
+import TaskDetailsScreen from "./src/screens/TaskDetailsScreen";
+import AddTaskScreen from "./src/screens/AddTaskScreen";
+import TaskHistoryScreen from "./src/screens/TaskHistoryScreen";
+
+const Stack = createStackNavigator();
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Login">
+        <Stack.Screen name="Login" component={LoginScreen} options={{headerShown:false,}}/>
+        <Stack.Screen name="TaskList" component={TaskListScreen} options={{headerShown:false,}}/>
+        <Stack.Screen name="History" component={TaskHistoryScreen} options={{headerShown:false,}}/>
+        <Stack.Screen name="AddTask" component={AddTaskScreen}options={{headerShown: false,}}/>        
+          <Stack.Screen name="TaskDetails" component={TaskDetailsScreen} options={{headerTitle: 'Voltar'}} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
